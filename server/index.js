@@ -5,6 +5,11 @@ const path = require('path');
 const morgan = require('morgan');
 const db = require('../database/index');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer({ dest: './server/temp' });
+const fs = require('fs');
+
+const testData = require('../test/testData');
 
 app.use(morgan('short'));
 app.use(bodyParser.json());
@@ -60,7 +65,7 @@ app.get('/fileTree', async (req, res) => {
   console.log(1, entities)
   buildTree(fileTree, await entities);
   console.log(3, fileTree);
-  res.json(fileTree);
+  res.json(testData);
 });
 
 app.get('/:folder_id', (req, res) => {
@@ -73,6 +78,10 @@ app.post('/folder', (req, res) => {
   db.saveFolderData({ name, path }, document => {
       res.send(document);
     })
+})
+
+app.post('/file', upload.single('file'), (req, res) => {
+  res.json(req.file);
 })
 
 app.listen(PORT, () => {

@@ -21,7 +21,7 @@ class App extends React.Component {
   componentDidMount() {
     Axios.get('/fileTree')
       .then(tree => {
-        this.setState({ fileTree: JSON.parse(tree) })
+        this.setState({ fileTree: tree.data })
       });
   }
 
@@ -35,6 +35,7 @@ class App extends React.Component {
       <div>
         <UploadButton upload={this.uploadFile} />
         <AddFolder />
+        <FileTree files={this.state.fileTree} />
       </div>
     );
   }
