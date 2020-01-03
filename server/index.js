@@ -73,15 +73,19 @@ app.get('/:folder_id', (req, res) => {
 })
 
 // POST routes
-app.post('/folder', (req, res) => {
+app.post('/upload/folder', (req, res) => {
   const { name, path } = req.body;
   db.saveFolderData({ name, path }, document => {
       res.send(document);
     })
 })
 
-app.post('/file', upload.single('file'), (req, res) => {
+app.post('/upload/file', upload.single('file'), (req, res) => {
   res.json(req.file);
+})
+
+app.post('/upload/files', upload.array('files'), (req, res) => {
+  res.json(req.files);
 })
 
 app.listen(PORT, () => {
