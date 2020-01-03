@@ -25,13 +25,13 @@ const Folder = mongoose.model('Folder', folderSchema);
 const getAllFiles = async cb => {
   const files = await File.find();
 
-  cb(files);
+  return files;
 }
 
 const getAllFolders = async cb => {
   const folders = await Folder.find();
 
-  cb(folders);
+  return folders;
 }
 
 const saveFileData = async (fileInfo, cb) => {

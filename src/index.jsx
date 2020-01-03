@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import UploadButton from './uploadButton.jsx';
 import AddFolder from './addFolder.jsx';
+import FileTree from './fileTree.jsx';
 import Axios from 'axios';
 
 class App extends React.Component {
@@ -26,7 +27,7 @@ class App extends React.Component {
 
   uploadFile(event) {
     event.preventDefault();
-    console.log(event.target);
+    console.log(event.target.value);
   }
 
   render() {
